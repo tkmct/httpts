@@ -6,5 +6,6 @@ test('request parser', () => {
 
   const request = parse(req)
 
+  expect(request.header.Method).toBe('GET')
   expect(request.header.Host).toBe('localhost:8080')
 })

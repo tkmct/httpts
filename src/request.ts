@@ -35,7 +35,9 @@ function parseHeader(rawHeader: string): HttpHeader {
   const header: { [s: string]: string } = {}
   const headers = rawHeader.split(LINE_SEPARATOR)
   headers.forEach((h, idx) => {
+    // First line must be a method and protocol version
     if (idx === 0) {
+      header.Method = h.split('/')[0].trim()
       return
     }
 
