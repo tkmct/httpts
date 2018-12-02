@@ -1,7 +1,7 @@
 {
-  "name": "ts-node-sarter",
+  "name": "httpts",
   "version": "0.1.0",
-  "description": "Typescript Node Starter",
+  "description": "Typescript http implementation for studying purpose",
   "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/tkmct/ts-node-starter.git"
+    "url": "git+ssh://git@github.com/tkmct/httpts.git"
   },
   "keywords": [],
-  "author": "ttsutsumi",
-  "license": "ISC",
+  "author": "tkmct",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tkmct/ts-node-starter/issues"
+    "url": "https://github.com/tkmct/httpts/issues"
   },
-  "homepage": "https://github.com/tkmct/ts-node-starter#readme",
+  "homepage": "https://github.com/tkmct/httpts#readme",
   "lint-staged": {
     "*.ts": [
       "tslint --fix",
