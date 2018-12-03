@@ -1,18 +1,9 @@
-interface HttpHeader {
-  [s: string]: string
-}
+import { HttpHeader, validate } from './header'
+import { maybeString } from './utils'
 
 interface Request {
   header: HttpHeader
   body: string | null
-}
-
-function maybeString(str: string): string | null {
-  if (str.length === 0) {
-    return null
-  }
-
-  return str
 }
 
 // SEPARATORS
@@ -32,7 +23,7 @@ function parse(rawRequest: string): Request {
 }
 
 function parseHeader(rawHeader: string): HttpHeader {
-  const header: { [s: string]: string } = {}
+  const header: any = {}
   const headers = rawHeader.split(LINE_SEPARATOR)
   headers.forEach((h, idx) => {
     // First line must be a method and protocol version
@@ -43,10 +34,20 @@ function parseHeader(rawHeader: string): HttpHeader {
 
     // check if valid header
     const [k, v] = h.split(HEADER_SEPARATOR)
-    header[k] = v
+    if (k === 'Host') {
+      header.Host = v
+    } else if (k === 'User-Agent') {
+      header['User-Agent'] = v
+    } else if (k === 'Accept') {
+      header.Accept = v
+    }
   })
 
-  return header
+  if (validate(header)) {
+    return header
+  }
+
+  throw new Error('Required headers are missing')
 }
 
-export { parse }
+export { parse, parseHeader }
