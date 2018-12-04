@@ -1,19 +1,12 @@
-import * as net from 'net'
-import { parse } from './request'
+import Server from './server'
 
 function main() {
-  const server = net.createServer(socket => {
-    socket.on('data', buffer => {
-      const r = buffer.toString()
-      const request = parse(r)
-      console.log(request)
-
-      socket.write('Request sent')
-      socket.end()
-    })
+  const server = new Server()
+  server.get((req, res) => {
+    res.write('ECHO: ' + req.body)
+    res.end()
   })
-
-  server.listen(8080, 'localhost')
+  server.listen(8080)
 }
 
 main()

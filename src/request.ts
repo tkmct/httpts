@@ -1,7 +1,7 @@
 import { HttpHeader, validate } from './header'
 import { maybeString } from './utils'
 
-interface Request {
+export interface Request {
   header: HttpHeader
   body: string | null
 }
